@@ -1,0 +1,16 @@
+print("What do you get when you cross a snowman and a vampire?")
+input()
+print("Frostbite!\n")
+
+print("What the given calls a 'Black Hole'")
+input()
+print("Caries!\n")
+
+print("Knock-knock")
+input()
+print("Who's there")
+input()
+print("Impolite cow")
+input()
+print("Impolite cow?", end="")
+print("-Muuuuuuu!")
