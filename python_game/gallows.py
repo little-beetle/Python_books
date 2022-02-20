@@ -35,16 +35,37 @@ HANGMAN_PICS = ['''
  0   |
 /|\  |
 / \  |
-    ===''']
-words = 'аист акула бабуин баран барсук бобр бык верблюд волк воробей ворон выдра голубь ' \
-        'гусь жаба зебра змея индюк кит кобра коза козел койот корова кошка кролик крыса курица лама' \
-        'ласка лебедь лев лиса лосось лось лягушка медведь моллюск моль мул муравей мышь норка носорог обезьяна овца окунь олень орел осел панда паук питон попугай пума семга скунс собака' \
-        'сова тигр тритон тюлень утка форель хорек черепаха ястреб ящерица'.split()
+    ===''', '''
+ +---+
+[0   |
+/|\  |
+/ \  |
+    ===    
+    ''', '''
+ +---+
+[0]  |
+/|\  |
+/ \  |
+    ===    
+    ''']
+
+words = {'Цвета': 'красный оранжевый желтый зеленый синий голубой фиолетовый белый черный коричневый'.split(),
+         'Фигуры': 'квадрат треугольник прямоугольник круг эллипс ромб трапеция параллелограмм '
+                   'пятиугольник шестиугольник восьмиугольник'.split(),
+         'Фрукты': 'яблоко апельсин лимон лайм груша мандарин виноград грейпфрут персик '
+                   'банан абрикос манго банан нектарин'.split(),
+         'Животные': 'аист бабуин баран барсук бык волк зебра кит коза корова кошка кролик '
+                     'крыса лев лиса лось медведь мул '
+                     'мышь норка носорог обезьяна овца олень осел панда пума скунс собака сова '
+                     'тигр тюлень хорек ящерица'.split()
+         }
 
 
-def get_random_word(word_list):
-    word_index = random.randint(0, len(word_list) - 1)
-    return word_list[word_index]
+def get_random_word(word_dict):
+    word_key = random.choice(list(word_dict.keys()))
+
+    word_index = random.randint(0, len(word_dict) - 1)
+    return word_dict[word_key][word_index]
 
 
 def display_board(missed_letters, correct_letters, secret_word):
@@ -87,6 +108,20 @@ def play_again():
 
 
 print('В И С Е Л И Ц А')
+
+difficulty = ""
+while difficulty not in "ЛСТ":
+    print("Выберите уровень сложности: Л - Легкий, С - Средний, Т - Тяжелый")
+    difficulty = input().upper()
+if difficulty == "С":
+    del HANGMAN_PICS[8]
+    del HANGMAN_PICS[7]
+if difficulty == "Т":
+    del HANGMAN_PICS[8]
+    del HANGMAN_PICS[7]
+    del HANGMAN_PICS[5]
+    del HANGMAN_PICS[3]
+
 missed_letters = ''
 correct_letters = ''
 secret_word = get_random_word(words)
@@ -126,6 +161,5 @@ while True:
             correct_letters = ""
             game_is_done = False
             secret_word = get_random_word(words)
-
         else:
             break
